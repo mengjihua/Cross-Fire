@@ -22,33 +22,24 @@ def solve():
     n = int(input())
     b = list(map(int, input().split()))
     
-    if sum(set(b)) > n:
-        return -1
-    
-    g = defaultdict(list)
+    g = [[] for _ in range(n + 1)]
     for i, k in enumerate(b):
         g[k].append(i)
     
-    valid = True
     for k in range(1, n + 1):
         if len(g[k]) % k != 0:
-            valid = False
-            break
-            
-    if not valid:
-        return -1
+            return -1
     
     ans = [0] * n
     nxt = 1
-    for k, lst in g.items():
-        if not lst:
-            continue
-        m = len(lst) // k
+    for k in range(1, n + 1):
+        indices = g[k]
+        m = len(indices) // k
         for i in range(m):
             start = i * k
             for j in range(k):
-                pos = lst[start + j]
-                ans[pos] = nxt
+                idx = indices[start + j]
+                ans[idx] = nxt
             nxt += 1
     return ' '.join(map(str, ans))
 
