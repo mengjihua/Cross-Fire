@@ -19,7 +19,26 @@ def lcm(a, b): return a * b // gcd(a, b)
 t = int(input())
 
 def solve():
-    pass
+    n, k = map(int, input().split())
+    s = list(input())
+    
+    res = ['+'] * n
+    zero_cnt, one_cnt, two_cnt = s.count('0'), s.count('1'), s.count('2')
+    
+    if k == n:
+        return '-' * n
+    
+    for i in range(zero_cnt, zero_cnt + two_cnt):
+        res[i] = '?'
+    for i in range(n - (one_cnt + two_cnt), n - one_cnt):
+        res[i] = '?'
+    for i in range(zero_cnt):
+        res[i] = '-'
+    for i in range(n - one_cnt, n):
+        res[i] = '-'
+        
+    return ''.join(res)
+        
 
 ans = []
 for _ in range(t):

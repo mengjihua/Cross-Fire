@@ -19,7 +19,39 @@ def lcm(a, b): return a * b // gcd(a, b)
 t = int(input())
 
 def solve():
-    pass
+    n = int(input())
+    s = list(input())
+    
+    cnt_a = s.count('a')
+    cnt_b = s.count('b')
+
+    if cnt_a == cnt_b:
+        return 0
+
+    diff = cnt_a - cnt_b
+    pre = 0
+    dic = {0: -1}
+    
+    mn_len = inf
+    for i, c in enumerate(s):
+        if c == 'a':
+            pre += 1
+        else:
+            pre -= 1
+        
+        target = pre - diff
+        
+        if target in dic:
+            start = dic[target] + 1
+            length = i - start + 1
+            if length < mn_len:
+                mn_len = length
+        
+        dic[pre] = i
+    
+    if mn_len == inf or mn_len == n:
+        return -1
+    return mn_len
 
 ans = []
 for _ in range(t):

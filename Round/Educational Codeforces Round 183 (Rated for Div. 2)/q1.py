@@ -19,7 +19,8 @@ def lcm(a, b): return a * b // gcd(a, b)
 t = int(input())
 
 def solve():
-    pass
+    n = int(input())
+    return (3 - n % 3) % 3
 
 ans = []
 for _ in range(t):
